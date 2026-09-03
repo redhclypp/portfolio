@@ -1,118 +1,113 @@
-Meysya Indah Calista Putri — Portfolio
+# Meysya Indah Calista Putri — Portfolio
 
 Portfolio pribadi Meysya Indah Calista Putri, mahasiswa Teknologi Informasi Universitas Brawijaya.
 
 Website ini dibuat untuk menampilkan profil, pengalaman, sertifikasi, serta berbagai project yang telah dikerjakan selama perjalanan akademik dan pengembangan skill di bidang teknologi informasi.
 
-✨ Fitur
+## ✨ Fitur
 
-Single Page Portfolio: Hero, About, Experience, Projects, Certificates, dan Contact
+- Single Page Portfolio: Hero, About, Experience, Projects, Certificates, dan Contact
+- Project showcase untuk menampilkan berbagai project yang telah dikerjakan
+- Dynamic project detail page untuk menampilkan informasi project secara lebih lengkap
+- Interactive 3D element menggunakan Lanyard Scene
+- Custom cursor
+- Loading screen
+- Theme switcher
+- Responsive design untuk berbagai ukuran perangkat
+- Login page untuk akses halaman admin
+- Admin page untuk pengelolaan konten portfolio
+- Integrasi Supabase untuk kebutuhan data portfolio
+- Certificate showcase
+- Contact section
 
-Project showcase untuk menampilkan berbagai project yang telah dikerjakan
+## 🛠️ Tech Stack
 
-Dynamic project detail page untuk menampilkan informasi project secara lebih lengkap
+### Frontend
 
-Interactive 3D element menggunakan Lanyard Scene
+- React
+- TypeScript
+- CSS
+- Tailwind CSS
 
-Custom cursor
+### Development Tools
 
-Loading screen
+- Vite
+- Git
+- GitHub
+- Supabase
 
-Theme switcher
+### Interactive & 3D
 
-Responsive design untuk berbagai ukuran perangkat
+- Three.js
+- React Three Fiber
 
-Login page untuk akses halaman admin
+## 🚀 Menjalankan Secara Lokal
 
-Admin page untuk pengelolaan konten portfolio
-
-Integrasi Supabase untuk kebutuhan data portfolio
-
-Certificate showcase
-
-Contact section
-
-🛠️ Tech Stack
-
-Frontend
-
-React
-
-TypeScript
-
-CSS
-
-Tailwind CSS
-
-Development Tools
-
-Vite
-
-Git
-
-GitHub
-
-Supabase
-
-Interactive & 3D
-
-Three.js
-
-React Three Fiber
-
-🚀 Menjalankan Secara Lokal
-
-Prasyarat
+### Prasyarat
 
 Pastikan sudah terinstall:
 
-Node.js
+- Node.js
+- npm
 
-npm
-
-Installation
+### Installation
 
 Clone repository:
 
+```bash
 git clone https://github.com/redhclypp/portfolio.git
+```
 
 Masuk ke folder project:
 
+```bash
 cd portfolio
+```
 
 Install dependencies:
 
+```bash
 npm install
+```
 
 Jalankan development server:
 
+```bash
 npm run dev
+```
 
 Kemudian buka URL yang diberikan oleh Vite pada browser.
 
-🔐 Environment Variables
+## 🔐 Environment Variables
 
 Project ini menggunakan environment variables untuk konfigurasi Supabase.
 
-Buat file .env pada root directory project:
+Buat file `.env` pada root directory project:
 
+```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-Jangan commit file .env ke repository. File tersebut digunakan untuk menyimpan konfigurasi environment secara lokal.
+> Jangan commit file `.env` ke repository. File tersebut digunakan untuk menyimpan konfigurasi environment secara lokal.
 
-📦 Build untuk Production
+## 📦 Build untuk Production
 
 Untuk membuat production build:
 
+```bash
 npm run build
+```
 
 Untuk melakukan preview terhadap hasil build:
 
+```bash
 npm run preview
+```
 
-📁 Struktur Folder
+## 📁 Struktur Folder
 
+```text
 src/
 ├── assets/
 │
@@ -149,53 +144,52 @@ src/
 ├── App.css
 ├── index.css
 └── main.tsx
+```
 
-📂 Featured Projects
+## 📂 Featured Projects
 
 Beberapa project yang ditampilkan dalam portfolio ini:
 
-AI Contract Risk Analyzer
+### AI Contract Risk Analyzer
 
 AI-based project yang dikembangkan untuk membantu menganalisis kontrak dan mengidentifikasi potensi risiko dalam dokumen legal.
 
-Fire Detection System
+### Fire Detection System
 
 Project berbasis IoT yang berfokus pada deteksi potensi kebakaran dan mendukung pemberian peringatan secara lebih dini.
 
-PlanCraft
+### PlanCraft
 
 Project yang dikembangkan untuk mendukung proses perencanaan dan pengelolaan aktivitas secara lebih terstruktur.
 
-Grocery
+### Grocery
 
 Project aplikasi yang dikembangkan untuk mendukung kebutuhan pengelolaan grocery.
 
-Sedentary
+### Sedentary
 
 Project yang berfokus pada awareness terhadap sedentary behavior dan aktivitas pengguna.
 
-🎓 Certifications
+## 🎓 Certifications
 
 Beberapa sertifikasi yang ditampilkan pada portfolio:
 
-AI in Legal: From Research to Results
+- AI in Legal: From Research to Results
+- AI Literacy
+- Unleashing the Power of AI Agents
 
-AI Literacy
+## 🌐 Live Portfolio
 
-Unleashing the Power of AI Agents
+[Visit My Portfolio](https://myscalista.netlify.app)
 
-🌐 Live Portfolio
+## 📫 Contact
 
-Visit My Portfolio
+**Meysya Indah Calista Putri**
 
-📫 Contact
+- Email: myscallista@gmail.com
+- LinkedIn: https://www.linkedin.com/in/meysyaindahcalistap
+- Portfolio: https://myscalista.netlify.app
 
-Meysya Indah Calista Putri
-
-Email: myscallista@gmail.com
-
-LinkedIn: https://www.linkedin.com/in/meysyaindahcalistap
-
-Portfolio: https://myscalista.netlify.app
+---
 
 Thank you for visiting my portfolio! 🚀
