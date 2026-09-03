@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# Meysya Indah Calista Putri — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hi! I'm Meysya Indah Calista Putri, an Information Technology student at Universitas Brawijaya with an interest in software development, system analysis, data, and emerging technologies.
 
-Currently, two official plugins are available:
+This repository contains the source code for my personal portfolio website, showcasing my academic projects, experiences, certifications, and technical skills.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About the Portfolio
 
-## React Compiler
+This portfolio website was developed to present my background, projects, experiences, and certifications in a structured and interactive way.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The website includes:
 
-## Expanding the ESLint configuration
+- Personal introduction and profile
+- Technical skills
+- Academic and project experience
+- Project showcase and detailed project information
+- Certifications
+- Contact information
+- Interactive UI elements and animations
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Featured Projects
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Some of the projects showcased in this portfolio include:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### AI Contract Risk Analyzer
+An AI-based application developed to analyze legal contracts and identify potential risks, supporting users in reviewing contract information more efficiently.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Fire Detection System
+An IoT-based project focused on detecting potential fire incidents and providing an alert mechanism for early response.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### PlanCraft
+A project focused on planning and organizing activities through a structured digital solution.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Grocery
+A digital application project related to grocery management and user needs.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Sedentary
+A project designed around sedentary behavior awareness and supporting users in maintaining healthier activity habits.
+
+## Tech Stack
+
+### Frontend
+- React
+- TypeScript
+- HTML
+- CSS
+- Tailwind CSS
+
+### Development & Tools
+- Git
+- GitHub
+- Vite
+- Supabase
+
+### Areas of Interest
+- Software Development
+- System Analysis & Design
+- Data Analysis
+- Business Process Analysis
+- Artificial Intelligence
+- Internet of Things
+- Project Management
+
+## Repository Structure
+
+```text
+src/
+├── assets/
+├── components/
+├── hooks/
+├── lib/
+├── pages/
+└── styles/
