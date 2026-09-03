@@ -1,73 +1,201 @@
-# Meysya Indah Calista Putri — Portfolio
+Meysya Indah Calista Putri — Portfolio
 
-Hi! I'm Meysya Indah Calista Putri, an Information Technology student at Universitas Brawijaya with an interest in software development, system analysis, data, and emerging technologies.
+Portfolio pribadi Meysya Indah Calista Putri, mahasiswa Teknologi Informasi Universitas Brawijaya.
 
-This repository contains the source code for my personal portfolio website, showcasing my academic projects, experiences, certifications, and technical skills.
+Website ini dibuat untuk menampilkan profil, pengalaman, sertifikasi, serta berbagai project yang telah dikerjakan selama perjalanan akademik dan pengembangan skill di bidang teknologi informasi.
 
-## About the Portfolio
+✨ Fitur
 
-This portfolio website was developed to present my background, projects, experiences, and certifications in a structured and interactive way.
+Single Page Portfolio: Hero, About, Experience, Projects, Certificates, dan Contact
 
-The website includes:
+Project showcase untuk menampilkan berbagai project yang telah dikerjakan
 
-- Personal introduction and profile
-- Technical skills
-- Academic and project experience
-- Project showcase and detailed project information
-- Certifications
-- Contact information
-- Interactive UI elements and animations
+Dynamic project detail page untuk menampilkan informasi project secara lebih lengkap
 
-## Featured Projects
+Interactive 3D element menggunakan Lanyard Scene
 
-Some of the projects showcased in this portfolio include:
+Custom cursor
 
-### AI Contract Risk Analyzer
-An AI-based application developed to analyze legal contracts and identify potential risks, supporting users in reviewing contract information more efficiently.
+Loading screen
 
-### Fire Detection System
-An IoT-based project focused on detecting potential fire incidents and providing an alert mechanism for early response.
+Theme switcher
 
-### PlanCraft
-A project focused on planning and organizing activities through a structured digital solution.
+Responsive design untuk berbagai ukuran perangkat
 
-### Grocery
-A digital application project related to grocery management and user needs.
+Login page untuk akses halaman admin
 
-### Sedentary
-A project designed around sedentary behavior awareness and supporting users in maintaining healthier activity habits.
+Admin page untuk pengelolaan konten portfolio
 
-## Tech Stack
+Integrasi Supabase untuk kebutuhan data portfolio
 
-### Frontend
-- React
-- TypeScript
-- HTML
-- CSS
-- Tailwind CSS
+Certificate showcase
 
-### Development & Tools
-- Git
-- GitHub
-- Vite
-- Supabase
+Contact section
 
-### Areas of Interest
-- Software Development
-- System Analysis & Design
-- Data Analysis
-- Business Process Analysis
-- Artificial Intelligence
-- Internet of Things
-- Project Management
+🛠️ Tech Stack
 
-## Repository Structure
+Frontend
 
-```text
+React
+
+TypeScript
+
+CSS
+
+Tailwind CSS
+
+Development Tools
+
+Vite
+
+Git
+
+GitHub
+
+Supabase
+
+Interactive & 3D
+
+Three.js
+
+React Three Fiber
+
+🚀 Menjalankan Secara Lokal
+
+Prasyarat
+
+Pastikan sudah terinstall:
+
+Node.js
+
+npm
+
+Installation
+
+Clone repository:
+
+git clone https://github.com/redhclypp/portfolio.git
+
+Masuk ke folder project:
+
+cd portfolio
+
+Install dependencies:
+
+npm install
+
+Jalankan development server:
+
+npm run dev
+
+Kemudian buka URL yang diberikan oleh Vite pada browser.
+
+🔐 Environment Variables
+
+Project ini menggunakan environment variables untuk konfigurasi Supabase.
+
+Buat file .env pada root directory project:
+
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+Jangan commit file .env ke repository. File tersebut digunakan untuk menyimpan konfigurasi environment secara lokal.
+
+📦 Build untuk Production
+
+Untuk membuat production build:
+
+npm run build
+
+Untuk melakukan preview terhadap hasil build:
+
+npm run preview
+
+📁 Struktur Folder
+
 src/
 ├── assets/
+│
 ├── components/
+│   ├── About.tsx
+│   ├── Certificates.tsx
+│   ├── Contact.tsx
+│   ├── Cursor.tsx
+│   ├── Experience.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── LanyardScene.tsx
+│   ├── Loader.tsx
+│   ├── Navbar.tsx
+│   ├── Projects.tsx
+│   ├── Strip.tsx
+│   └── Themeswitcher.tsx
+│
 ├── hooks/
+│   └── useSiteContent.ts
+│
 ├── lib/
+│   └── supabase.ts
+│
 ├── pages/
-└── styles/
+│   ├── Admin.tsx
+│   ├── Login.tsx
+│   └── ProjectDetail.tsx
+│
+├── styles/
+│   └── ui/
+│
+├── App.tsx
+├── App.css
+├── index.css
+└── main.tsx
+
+📂 Featured Projects
+
+Beberapa project yang ditampilkan dalam portfolio ini:
+
+AI Contract Risk Analyzer
+
+AI-based project yang dikembangkan untuk membantu menganalisis kontrak dan mengidentifikasi potensi risiko dalam dokumen legal.
+
+Fire Detection System
+
+Project berbasis IoT yang berfokus pada deteksi potensi kebakaran dan mendukung pemberian peringatan secara lebih dini.
+
+PlanCraft
+
+Project yang dikembangkan untuk mendukung proses perencanaan dan pengelolaan aktivitas secara lebih terstruktur.
+
+Grocery
+
+Project aplikasi yang dikembangkan untuk mendukung kebutuhan pengelolaan grocery.
+
+Sedentary
+
+Project yang berfokus pada awareness terhadap sedentary behavior dan aktivitas pengguna.
+
+🎓 Certifications
+
+Beberapa sertifikasi yang ditampilkan pada portfolio:
+
+AI in Legal: From Research to Results
+
+AI Literacy
+
+Unleashing the Power of AI Agents
+
+🌐 Live Portfolio
+
+Visit My Portfolio
+
+📫 Contact
+
+Meysya Indah Calista Putri
+
+Email: myscallista@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/meysyaindahcalistap
+
+Portfolio: https://myscalista.netlify.app
+
+Thank you for visiting my portfolio! 🚀
