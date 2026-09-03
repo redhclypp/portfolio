@@ -1,0 +1,240 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================
+   RESET & BASE
+======================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+:root {
+  --bg:           #03091a;
+  --bg2:          #060e24;
+  --blue:         #1246ff;
+  --blue-mid:     #2d5fff;
+  --blue-bright:  #4d7fff;
+  --cyan:         #00d4ff;
+  --white:        #dde8ff;
+  --dim:          #6677aa;
+  --card:         rgba(8,20,60,.7);
+  --border:       rgba(50,100,255,.2);
+  --border-c:     rgba(0,212,255,.35);
+  --font-display: 'Great Vibes', cursive;
+  --font-body:    'Poppins', sans-serif;
+  --font-mono:    'Geist Mono', monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  max-width: 100vw;
+  cursor: none;
+}
+
+/* ========================
+   CUSTOM CURSOR
+======================== */
+
+#cur {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  mix-blend-mode: screen;
+  transition: width .15s, height .15s;
+}
+
+#cur-r.cur-drag {
+  width: 22px; height: 22px;
+  border-color: var(--cyan);
+  background: rgba(0,212,255,.12);
+}
+
+#cur-r {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(0,212,255,.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: all .12s ease;
+}
+
+/* ========================
+   BACKGROUND EFFECTS
+======================== */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(10,50,200,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 85% 70%, rgba(0,180,255,.1)  0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(5,20,80,.3)    0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(50,100,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50,100,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================
+   SCROLLBAR
+======================== */
+
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  { background: var(--blue); border-radius: 2px; }
+
+/* ========================
+   SECTION BASE
+======================== */
+
+section { position: relative; z-index: 1; padding: 70px 60px; }
+
+.portfolio-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1480px, 100%);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.portfolio-hero-panel {
+  position: relative;
+  margin: 0 -28px;
+  border-bottom: 1px solid rgba(0,212,255,.16);
+  background: linear-gradient(120deg, rgba(7,18,53,.74), rgba(3,9,26,.28));
+  overflow: hidden;
+}
+
+.portfolio-hero-panel::before,
+.portfolio-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(50,100,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50,100,255,.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.portfolio-sections {
+  display: grid;
+  gap: 18px;
+  padding: 18px 0 30px;
+}
+
+.portfolio-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  background: rgba(5,13,39,.68);
+  box-shadow: 0 20px 70px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.035);
+}
+
+.portfolio-panel > section { position: relative; z-index: 1; }
+.portfolio-panel-about { background: linear-gradient(135deg, rgba(8,20,60,.78), rgba(5,13,39,.6)); }
+.portfolio-panel-projects { background: linear-gradient(135deg, rgba(5,22,48,.78), rgba(5,13,39,.6)); }
+.portfolio-panel-experience { background: linear-gradient(135deg, rgba(13,20,57,.78), rgba(5,13,39,.6)); }
+.portfolio-panel-certificates { background: linear-gradient(135deg, rgba(7,25,52,.78), rgba(5,13,39,.6)); }
+.portfolio-panel-contact { background: linear-gradient(135deg, rgba(5,27,51,.82), rgba(5,13,39,.6)); }
+
+.sec-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border: 1px solid rgba(0,212,255,.2);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.sec-title { font-family: var(--font-body); font-size: clamp(32px,4vw,54px); font-weight: 800; }
+
+.mix-title { font-family: var(--font-body); font-weight: 800; }
+
+/* Great Vibes initial letter â€” clip container so it never cuts off */
+.mix-title .s {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #fff;
+  display: inline-block;
+  /* Give it room to breathe left & right */
+  padding-left: 18px;
+  margin-left: -10px;
+  margin-right: 2px;
+  overflow: visible;
+  transform: translateY(3px);
+  position: relative;
+}
+
+/* ========================
+   STRIP TICKER
+======================== */
+
+.strip {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  overflow: hidden;
+  background: rgba(8,20,60,.3);
+}
+
+.strip-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: scroll 22s linear infinite;
+}
+
+.strip-track span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.strip-track .sep { color: var(--cyan); }
+
+/* ========================
+   KEYFRAMES
+======================== */
+
+@keyframes fadeIn      { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scroll      { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blink       { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
+@keyframes spin        { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse       { 0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,.5); } 50% { box-shadow: 0 0 0 6px rgba(0,212,255,0); } }
+@keyframes hintPulse   { 0%, 100% { opacity: .7; } 50% { opacity: 1; } }
+

@@ -1,0 +1,14 @@
+﻿@import "./styles/ui/base.css";
+@import "./styles/ui/navbar.css";
+@import "./styles/ui/hero.css";
+@import "./styles/ui/about.css";
+@import "./styles/ui/experience.css";
+@import "./styles/ui/certificates.css";
+@import "./styles/ui/projects.css";
+@import "./styles/ui/contact.css";
+@import "./styles/ui/footer.css";
+@import "./styles/ui/loader.css";
+@import "./styles/ui/project-detail.css";
+@import "./styles/ui/admin.css";
+@import "./styles/ui/responsive.css";
+@import "./styles/ui/theme.css";

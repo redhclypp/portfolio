@@ -1,0 +1,105 @@
+﻿/* ========================
+   CONTACT (ctc-)
+======================== */
+
+#contact {
+  position: relative; z-index: 1;
+  padding-top: 120px; padding-bottom: 120px;
+  overflow: visible;
+}
+
+#contact::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at top,rgba(0,212,255,.10),transparent 45%);
+  pointer-events: none;
+}
+
+.contact-inner { position: relative; z-index: 2; max-width: 900px; margin: auto; text-align: center; }
+
+/* Let's Connect heading â€” fix L clipping */
+.contact-big {
+  font-size: clamp(58px,8vw,120px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-family: var(--font-body);
+  letter-spacing: 1px;
+  color: white;
+  /* overflow visible so Great Vibes "L" isn't clipped */
+  overflow: visible;
+  /* extra left pad so the script tail isn't cropped */
+  padding-left: 32px;
+}
+
+.contact-big .s {
+  padding-left: 20px;
+  margin-left: -18px;
+  overflow: visible;
+  display: inline-block;
+  transform: translateY(4px);
+}
+
+.contact-big .connect-grad {
+  background: linear-gradient(90deg,var(--cyan),var(--blue));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  overflow: visible;
+}
+
+.contact-sub { max-width: 650px; margin: auto auto 40px; color: #9aa4bf; font-size: 16px; line-height: 1.9; }
+
+.ctc-split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; text-align: left; }
+.ctc-socials { display: flex; flex-direction: column; gap: 12px; }
+
+.ctc-social-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px; border-radius: 16px;
+  background: rgba(8,18,50,.6); border: 1px solid rgba(255,255,255,.07);
+  text-decoration: none; transition: .25s ease; backdrop-filter: blur(20px);
+}
+
+.ctc-social-item:hover { border-color: rgba(0,212,255,.35); background: rgba(0,212,255,.05); transform: translateX(4px); }
+
+.ctc-social-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(18,70,255,.15); border: 1px solid rgba(50,100,255,.2);
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+
+.ctc-social-info  { flex: 1; min-width: 0; }
+.ctc-social-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 2px; }
+.ctc-social-value { font-size: 13px; font-weight: 600; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ctc-social-arrow { color: var(--dim); font-size: 14px; transition: .2s; flex-shrink: 0; }
+.ctc-social-item:hover .ctc-social-arrow { color: var(--cyan); }
+
+.ctc-form-panel { display: flex; flex-direction: column; gap: 18px; padding: 26px; border-radius: 20px; background: rgba(8,18,50,.6); border: 1px solid rgba(255,255,255,.07); backdrop-filter: blur(20px); }
+.ctc-form-title  { font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); opacity: .8; }
+.ctc-form        { display: flex; flex-direction: column; gap: 12px; }
+.ctc-field       { display: flex; flex-direction: column; gap: 5px; }
+.ctc-field-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+
+.ctc-input {
+  background: rgba(5,12,40,.7); border: 1px solid rgba(50,100,255,.18);
+  border-radius: 10px; padding: 10px 14px;
+  color: var(--white); font-size: 14px; font-family: var(--font-body);
+  outline: none; transition: .2s ease; resize: none; width: 100%;
+}
+
+.ctc-input:focus { border-color: rgba(0,212,255,.4); box-shadow: 0 0 0 3px rgba(0,212,255,.07); background: rgba(5,15,50,.9); }
+.ctc-input::placeholder { color: #4a5a80; }
+.ctc-textarea { min-height: 90px; line-height: 1.6; }
+
+.ctc-send-btn {
+  height: 44px; border: none; border-radius: 10px;
+  background: linear-gradient(135deg,var(--blue),var(--cyan));
+  color: #fff; font-size: 13px; font-weight: 700; font-family: var(--font-body);
+  cursor: pointer; transition: .25s ease; box-shadow: 0 0 20px rgba(0,212,255,.15); margin-top: 4px;
+}
+
+.ctc-send-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,212,255,.28); }
+.ctc-send-btn:disabled { opacity: .7; cursor: not-allowed; }
+.ctc-send-btn.sent { background: linear-gradient(135deg,#059669,#0ea5e9); }
+
