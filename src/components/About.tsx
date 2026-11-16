@@ -7,8 +7,22 @@ const DEFAULT_STACK = [
   { icon: '✦', label: 'Tools & Design', skills: ['Figma', 'Git', 'Postman', 'VS Code'] },
 ]
 
+function getCvDownloadUrl(url: string) {
+  const fileId =
+    url.match(/drive\.google\.com\/file\/d\/([^/?#]+)/)?.[1] ??
+    (url.includes('drive.google.com') ? url.match(/[?&]id=([^&#]+)/)?.[1] : undefined)
+
+  return fileId
+    ? `https://drive.google.com/uc?export=download&id=${fileId}`
+    : url
+}
+
 export default function About() {
   const { content } = useSiteContent()
+  const cvUrl = getCvDownloadUrl(
+    content.hero_cv_url ||
+      'https://drive.google.com/file/d/1X2IATWjA2ooheiXC39S1AHBD3QXOhjO-/view?usp=sharing'
+  )
 
   // Tech stack dari admin: format JSON string yang disimpan di site_content key 'about_stack'
   // Fallback ke DEFAULT_STACK kalau belum diset
@@ -41,7 +55,7 @@ export default function About() {
 
           <div className="abt-actions">
             <a
-              href="https://drive.google.com/file/d/1X2IATWjA2ooheiXC39S1AHBD3QXOhjO-/view?usp=sharing"
+              href={cvUrl}
               className="abt-btn primary"
             >
               Download CV
