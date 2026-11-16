@@ -41,6 +41,7 @@ export default function LanyardScene({ photoSrc }: { photoSrc: string }) {
 
 function Band({ maxSpeed = 50, minSpeed = 10, photoSrc, isMobile }) {
   const band = useRef(), fixed = useRef(), j1 = useRef(), j2 = useRef(), j3 = useRef(), card = useRef()
+  const lastDragPosition = useRef(new THREE.Vector3())
   const vec = new THREE.Vector3(), ang = new THREE.Vector3(), rot = new THREE.Vector3(), dir = new THREE.Vector3()
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 }
   const { nodes, materials } = useGLTF(GLTF_PATH)
@@ -92,7 +93,11 @@ function Band({ maxSpeed = 50, minSpeed = 10, photoSrc, isMobile }) {
       dir.copy(vec).sub(state.camera.position).normalize()
       vec.add(dir.multiplyScalar(state.camera.position.length()))
       ;[card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp())
-      card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z })
+      const nextPosition = vec.clone().sub(dragged)
+      const movement = nextPosition.clone().sub(lastDragPosition.current)
+      card.current?.setNextKinematicTranslation({ x: nextPosition.x, y: nextPosition.y, z: nextPosition.z })
+      card.current?.setAngvel({ x: movement.y * 8, y: movement.x * 8, z: -movement.x * 5 })
+      lastDragPosition.current.copy(nextPosition)
     }
     if (fixed.current) {
       ;[j1, j2].forEach((ref) => {
@@ -123,7 +128,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, photoSrc, isMobile }) {
         <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}><BallCollider args={[0.1]} /></RigidBody>
         <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
           <CuboidCollider args={[0.9, 1.125, 0.01]} />
-          <group scale={2.25} position={[0, -1.2, -0.05]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)} onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))} onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}>
+          <group scale={2.25} position={[0, -1.2, -0.05]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)} onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))} onPointerDown={(e) => { e.target.setPointerCapture(e.pointerId); lastDragPosition.current.copy(card.current.translation()); drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))) }}>
             <mesh geometry={cardGeo} scale={[1.125, 1, 1]}>
               <meshPhysicalMaterial map={photoTexture} map-anisotropy={16} clearcoat={1} clearcoatRoughness={0.15} roughness={0.3} metalness={0.4} />
             </mesh>

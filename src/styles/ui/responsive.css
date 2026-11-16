@@ -15,12 +15,12 @@
 }
 
 @media (max-width: 1000px) {
-  .portfolio-shell { padding: 0 16px; }
-  .portfolio-hero-panel { margin: 0 -16px; }
+  .portfolio-shell { padding: 0 24px; }
+  .portfolio-hero-panel { margin: 0 -24px; }
   .portfolio-sections { gap: 14px; padding-top: 14px; }
   .portfolio-panel { border-radius: 18px; }
-  section { padding: 70px 20px; }
-  nav     { padding: 14px 20px; }
+  section { padding: 70px 28px; }
+  nav     { left: 28px; right: 28px; padding: 14px 24px; }
   .nav-links { display: none; }
   .nav-right > .nav-cta { display: none; }
   .nav-menu-btn { display: flex; }
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 96px 24px 60px;
+    padding: 72px 32px 28px;
     gap: 24px;
   }
   .lanyard-wrap { order: 1; }
@@ -56,14 +56,14 @@
   body   { cursor: auto; }
   #cur, #cur-r { display: none; }
 
-  nav    { padding: 14px 16px; }
+  nav    { top: 10px; left: 16px; right: 16px; padding: 12px 20px; }
   .nav-links { display: none; }
   .nav-name  { font-size: 11px; letter-spacing: .08em; }
   .nav-cta   { padding: 7px 14px; font-size: 9px; white-space: nowrap; }
 
-  section { padding: 88px 16px 24px; }
+  section { padding: 88px 24px 24px; }
 
-  #hero { padding-top: 88px; }
+  #hero { padding: 68px 24px 28px; }
   .lanyard-wrap { width: min(62vw, 220px); padding-top: 58px; }
   .lanyard-card { height: auto; aspect-ratio: 3 / 4; }
   .hero-left {
@@ -79,18 +79,19 @@
 
   /* PROJECTS */
   .projects-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 0; }
-  .proj-slide      { width: 85vw !important; max-width: 300px; }
+  .proj-slide      { width: 85vw !important; max-width: 300px; height: 390px !important; }
   .card-preview-new{ height: 200px; }
-  .card-body-new   { padding: 18px; min-height: unset; max-height: unset; }
-  .card-title-new  { font-size: 16px; margin-bottom: 10px; overflow-y: visible; }
+  .card-body-new   { padding: 18px 18px 42px; min-height: 190px; max-height: 190px; flex-basis: 190px; }
+  .card-title-new  { font-size: 16px; margin-bottom: 10px; }
   .card-type-new   { font-size: 9px; }
   .card-tag-new    { padding: 4px 10px; font-size: 9px; }
   .card-link-new   { margin-top: 14px; font-size: 11px; }
   .sec-title       { font-size: 28px; }
 
   /* EXPERIENCE */
-  .exp-slide { width: 280px !important; }
+  .exp-slide { width: min(82vw, 320px) !important; }
   .exp-card  { min-height: 220px; padding: 22px; }
+  .exp-thumb  { width: calc(100% + 44px); height: 130px; margin: -22px -22px 4px; }
   .exp-role  { font-size: 16px; }
   .exp-desc  { font-size: 13px; }
 
@@ -126,11 +127,11 @@
 ======================== */
 
 @media (max-width: 480px) {
-  .portfolio-shell { padding: 0 10px; }
-  .portfolio-hero-panel { margin: 0 -10px; }
+  .portfolio-shell { padding: 0 16px; }
+  .portfolio-hero-panel { margin: 0 -16px; }
   .portfolio-sections { gap: 10px; padding-top: 10px; }
   .portfolio-panel { border-radius: 14px; }
-  section { padding: 56px 14px; }
+  section { padding: 56px 20px; }
 
   .lanyard-wrap { width: min(68vw, 200px); padding-top: 50px; }
 

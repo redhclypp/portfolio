@@ -8,7 +8,7 @@ type Project = {
 }
 type ProjectDetails = { overview?: string; problem?: string; solution?: string; features?: string[]; process?: string[]; challenges?: string[]; result?: string; screenshots?: string[] }
 type Experience = {
-  id: string; date: string; role: string; org: string; description: string
+  id: string; date: string; role: string; org: string; description: string; image?: string
 }
 type Certificate = {
   id: string; title: string; issuer: string; year: string; image: string
@@ -78,6 +78,8 @@ export default function Admin() {
   const [savingField, setSavingField] = useState<string | null>(null)
   const [savingSection, setSavingSection] = useState<string | null>(null)
   const [expForm, setExpForm] = useState({ date: '', role: '', org: '', description: '' })
+  const [expImageFile, setExpImageFile] = useState<File | null>(null)
+  const [expImagePreview, setExpImagePreview] = useState<string | null>(null)
   const [selectedExpId, setSelectedExpId] = useState<string | null>(null)
   const [isEditingExp, setIsEditingExp] = useState(false)
   const [stack, setStack] = useState<SkillCat[]>(DEFAULT_STACK)
@@ -145,6 +147,7 @@ export default function Admin() {
   const handleSelectExperience = (exp: Experience) => {
     setSelectedExpId(exp.id); setIsEditingExp(true)
     setExpForm({ date: exp.date||'', role: exp.role||'', org: exp.org||'', description: exp.description||'' })
+    setExpImagePreview(exp.image || null); setExpImageFile(null)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
   const handleSelectCertificate = (c: Certificate) => {
@@ -162,6 +165,12 @@ export default function Admin() {
   const handleCancelEditCert = () => {
     setSelectedCertId(null); setIsEditingCert(false); setCertForm(EMPTY_CERT_FORM)
     setCertImagePreview(null); setCertImageFile(null)
+  }
+  const handleExpImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null
+    setExpImageFile(file)
+    if (file) setExpImagePreview(URL.createObjectURL(file))
+    else setExpImagePreview(null)
   }
   const handleCancelEdit = () => {
     setSelectedId(null); setIsEditing(false); setForm(EMPTY_FORM)
@@ -262,7 +271,9 @@ export default function Admin() {
     if (!expForm.role || !expForm.org) { showToast('Role & organization wajib diisi', false); return }
     setLoading(true)
     try {
-      const payload = { date: expForm.date, role: expForm.role, org: expForm.org, description: expForm.description }
+      let imageUrl = expImagePreview
+      if (expImageFile) imageUrl = await uploadFile(expImageFile)
+      const payload = { date: expForm.date, role: expForm.role, org: expForm.org, description: expForm.description, image: imageUrl }
       let error = null
       if (isEditingExp && selectedExpId) {
         const { error: ue } = await supabase.from('experience').update(payload).eq('id', selectedExpId); error = ue
@@ -272,6 +283,7 @@ export default function Admin() {
       if (error) { showToast('Gagal simpan experience', false); return }
       showToast(isEditingExp ? 'Experience berhasil diupdate!' : 'Experience berhasil ditambahkan!')
       setExpForm({ date: '', role: '', org: '', description: '' })
+      setExpImagePreview(null); setExpImageFile(null)
       setSelectedExpId(null); setIsEditingExp(false)
       await fetchExperiences()
     } finally { setLoading(false) }
@@ -467,6 +479,11 @@ export default function Admin() {
                 <div className="admin-field">
                   <label className="admin-label">Description</label>
                   <textarea className="admin-input admin-textarea" value={expForm.description} onChange={e => setExpForm(f => ({ ...f, description: e.target.value }))} />
+                </div>
+                <div className="admin-field">
+                  <label className="admin-label">Foto Experience</label>
+                  <input type="file" accept="image/*" onChange={handleExpImageChange} className="admin-input" />
+                  {expImagePreview && <img src={expImagePreview} alt="preview experience" className="admin-thumb-preview" style={{ marginTop: '12px' }} />}
                 </div>
                 <button type="submit" className={`admin-submit ${isEditingExp ? 'editing' : ''}`} disabled={loading}>
                   {loading ? <span className="admin-spinner" /> : isEditingExp ? '✓ Save Experience' : '+ Add Experience'}

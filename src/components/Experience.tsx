@@ -12,6 +12,7 @@ type Experience = {
   role: string
   org: string
   description?: string
+  image?: string
 }
 
 export default function Experience() {
@@ -47,8 +48,15 @@ export default function Experience() {
           {experiences.map((e, i) => (
             <SwiperSlide key={e.id} className="exp-slide">
               <div className="exp-card">
-                <div className="exp-num">0{i + 1}</div>
-                <div className="exp-date">{e.date}</div>
+                <div className="exp-thumb">
+                  {e.image
+                    ? <img src={e.image} alt={`${e.role} at ${e.org}`} loading="lazy" />
+                    : <div className="exp-thumb-placeholder">{e.role.charAt(0)}</div>}
+                </div>
+                <div className="exp-meta">
+                  <div className="exp-num">0{i + 1}</div>
+                  <div className="exp-date">{e.date}</div>
+                </div>
                 <div className="exp-role">{e.role}</div>
                 <div className="exp-org">{e.org}</div>
                 {e.description && (

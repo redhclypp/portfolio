@@ -109,14 +109,14 @@ body::after {
    SECTION BASE
 ======================== */
 
-section { position: relative; z-index: 1; padding: 70px 60px; }
+section { position: relative; z-index: 1; padding: 70px 84px; }
 
 .portfolio-shell {
   position: relative;
   z-index: 1;
   width: min(1480px, 100%);
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 48px;
 }
 
 .portfolio-hero-panel {

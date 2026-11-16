@@ -158,7 +158,7 @@
   display: grid;
   grid-template-columns: 1fr minmax(380px, 520px);
   align-items: center;
-  padding: 76px 64px 34px;
+  padding: 52px 84px 14px;
   gap: 60px;
 }
 
@@ -167,7 +167,7 @@
   grid-column: 2;
   grid-row: 1;
   width: 100%;
-  height: 560px;
+  height: 610px;
   min-width: 0;
   overflow: visible;
 }
@@ -507,7 +507,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 88px 20px 0;
+    padding: 68px 20px 0;
     gap: 12px;
     min-height: auto;
     overflow: visible;

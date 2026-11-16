@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Link } from 'react-router-dom'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, FreeMode } from 'swiper/modules'
 import 'swiper/css'
@@ -109,6 +110,7 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([])
+  const { content } = useSiteContent()
 
   useEffect(() => {
     supabase
@@ -128,12 +130,12 @@ export default function Projects() {
           </h2>
         </div>
         <a
-          href="https://www.linkedin.com/in/meysya-indah-calista-putri-5363bb322"
+          href={content.contact_github || 'https://github.com/redhclypp'}
           target="_blank"
           rel="noreferrer"
           className="view-all"
         >
-          lihat di linkedin →
+          lihat di github →
         </a>
       </div>
 

@@ -56,6 +56,8 @@ export default function ProjectDetail() {
     { title: 'Solution', text: details.solution },
   ]
   const gallery = details.screenshots?.length ? details.screenshots : project.demo_files || []
+  const hasGithub = Boolean(project.github?.trim())
+  const hasDemo = Boolean(project.demo?.trim())
 
   return (
     <div className="pd-wrap">
@@ -137,7 +139,7 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        <div className="pd-sidebar">
+        <aside className="pd-sidebar">
           <div className="pd-card">
             <div className="pd-section-label" style={{ marginBottom: '16px' }}>Tech Stack</div>
             <div className="pd-tags-wrap">
@@ -147,33 +149,32 @@ export default function ProjectDetail() {
             </div>
           </div>
 
-          {(project.github || project.demo) && (
-            <div className="pd-card">
-              <div className="pd-section-label" style={{ marginBottom: '16px' }}>Links</div>
-              <div className="pd-links">
-                {project.github && (
-                  <a href={project.github} target="_blank" className="pd-link-btn">
-                    <span className="pd-link-icon">⌥</span>
-                    <span>GitHub Repository</span>
-                    <span className="pd-link-arrow">↗</span>
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} target="_blank" className="pd-link-btn pd-link-btn-cyan">
-                    <span className="pd-link-icon">◈</span>
-                    <span>Live Demo</span>
-                    <span className="pd-link-arrow">↗</span>
-                  </a>
-                )}
-              </div>
+          <div className="pd-card">
+            <div className="pd-section-label" style={{ marginBottom: '16px' }}>Links</div>
+            <div className="pd-links">
+              {hasGithub && (
+                <a href={project.github} target="_blank" rel="noreferrer" className="pd-link-btn">
+                  <span className="pd-link-icon">⌥</span>
+                  <span>GitHub Repository</span>
+                  <span className="pd-link-arrow">↗</span>
+                </a>
+              )}
+              {hasDemo && (
+                <a href={project.demo} target="_blank" rel="noreferrer" className="pd-link-btn pd-link-btn-cyan">
+                  <span className="pd-link-icon">◈</span>
+                  <span>Live Demo</span>
+                  <span className="pd-link-arrow">↗</span>
+                </a>
+              )}
+              {!hasGithub && !hasDemo && <span className="pd-link-empty">No links added in Admin</span>}
             </div>
-          )}
+          </div>
 
           <div className="pd-card pd-card-glow">
             <div className="pd-section-label" style={{ marginBottom: '8px' }}>Type</div>
             <div className="pd-type-big">{project.type}</div>
           </div>
-        </div>
+        </aside>
 
       </div>
     </div>
