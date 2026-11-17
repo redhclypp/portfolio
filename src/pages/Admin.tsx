@@ -62,6 +62,7 @@ export default function Admin() {
   const [demoFiles, setDemoFiles] = useState<File[]>([])
   const [thumbPreview, setThumbPreview] = useState<string | null>(null)
   const [projects, setProjects] = useState<Project[]>([])
+  const [projectSearch, setProjectSearch] = useState('')
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -339,6 +340,11 @@ export default function Admin() {
   const handleLogout = async () => { await supabase.auth.signOut(); navigate('/login') }
   const setField = (k: keyof typeof EMPTY_FORM) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm(f => ({ ...f, [k]: e.target.value }))
+  const filteredProjects = projects.filter(project =>
+    `${project.title} ${project.type} ${(project.tags || []).join(' ')}`
+      .toLowerCase()
+      .includes(projectSearch.trim().toLowerCase())
+  )
 
   return (
     <div className="admin-wrap">
@@ -348,28 +354,56 @@ export default function Admin() {
         </div>
       )}
 
-      <div className="admin-topbar">
+      <header className="admin-topbar">
         <div className="admin-brand">
           <div className="admin-brand-dot" />
-          <span>Admin Panel</span>
-          <span className="admin-brand-sub">portofolio meysya</span>
+          <div>
+            <span className="admin-brand-name">Meysya</span>
+            <span className="admin-brand-sub">PORTFOLIO ADMIN</span>
+          </div>
         </div>
-        <nav className="admin-nav" aria-label="Navigasi admin">
-          <button className={`admin-btn-ghost ${menu==='projects'?'active':''}`} aria-pressed={menu === 'projects'} onClick={() => setMenu('projects')}>Projects</button>
-          <button className={`admin-btn-ghost ${menu==='experience'?'active':''}`} aria-pressed={menu === 'experience'} onClick={() => setMenu('experience')}>Experience</button>
-          <button className={`admin-btn-ghost ${menu==='certificates'?'active':''}`} aria-pressed={menu === 'certificates'} onClick={() => setMenu('certificates')}>Certificates</button>
-          <button className={`admin-btn-ghost ${menu==='content'?'active':''}`} aria-pressed={menu === 'content'} onClick={() => setMenu('content')}>Site Content</button>
-          <button className={`admin-btn-ghost ${menu==='stack'?'active':''}`} aria-pressed={menu === 'stack'} onClick={() => setMenu('stack')}>Tech Stack</button>
-        </nav>
         <div className="admin-topbar-actions">
-          <Link to="/" className="admin-btn-ghost">← Portfolio</Link>
-          <button className="admin-btn-ghost" onClick={handleLogout}>Logout</button>
+          <Link to="/" className="admin-btn-ghost admin-preview-link">Lihat Portfolio <span aria-hidden="true">↗</span></Link>
+          <button className="admin-btn-ghost admin-logout-btn" onClick={handleLogout}>Keluar</button>
         </div>
-      </div>
+      </header>
 
-      <div className="admin-body">
+      <div className="admin-layout">
+        <aside className="admin-sidebar">
+          <div className="admin-nav-heading">MENU UTAMA</div>
+          <div className="admin-nav" role="navigation" aria-label="Navigasi admin">
+            <button className={`admin-nav-item ${menu === 'projects' ? 'active' : ''}`} aria-pressed={menu === 'projects'} onClick={() => setMenu('projects')}>
+              <span className="admin-nav-icon" aria-hidden="true">▣</span><span>Projects</span><span className="admin-nav-count">{projects.length}</span>
+            </button>
+            <button className={`admin-nav-item ${menu === 'experience' ? 'active' : ''}`} aria-pressed={menu === 'experience'} onClick={() => setMenu('experience')}>
+              <span className="admin-nav-icon" aria-hidden="true">⌁</span><span>Experience</span><span className="admin-nav-count">{experiences.length}</span>
+            </button>
+            <button className={`admin-nav-item ${menu === 'certificates' ? 'active' : ''}`} aria-pressed={menu === 'certificates'} onClick={() => setMenu('certificates')}>
+              <span className="admin-nav-icon" aria-hidden="true">◇</span><span>Certificates</span><span className="admin-nav-count">{certificates.length}</span>
+            </button>
+            <button className={`admin-nav-item ${menu === 'content' ? 'active' : ''}`} aria-pressed={menu === 'content'} onClick={() => setMenu('content')}>
+              <span className="admin-nav-icon" aria-hidden="true">◉</span><span>Site Content</span>
+            </button>
+            <button className={`admin-nav-item ${menu === 'stack' ? 'active' : ''}`} aria-pressed={menu === 'stack'} onClick={() => setMenu('stack')}>
+              <span className="admin-nav-icon" aria-hidden="true">✦</span><span>Tech Stack</span>
+            </button>
+          </div>
+          <div className="admin-sidebar-note">
+            <span className="admin-status-dot" />
+            <span>Dashboard aktif</span>
+          </div>
+        </aside>
 
-        {/* ===== PROJECTS ===== */}
+        <main className="admin-body">
+        <div className="admin-page-heading">
+          <div>
+            <div className="admin-panel-label">PORTFOLIO WORKSPACE</div>
+            <h1>{menu === 'projects' ? 'Projects' : menu === 'experience' ? 'Experience' : menu === 'certificates' ? 'Certificates' : menu === 'content' ? 'Site Content' : 'Tech Stack'}</h1>
+            <p>Kelola konten yang tampil di portfolio kamu.</p>
+          </div>
+          <span className="admin-page-context">MEYSYA / ADMIN</span>
+        </div>
+
         {menu === 'projects' && (
           <>
             <div className="admin-panel">
@@ -389,15 +423,18 @@ export default function Admin() {
                     <input className="admin-input" type="text" placeholder="e.g. Web Development" value={form.type} onChange={setField('type')} required />
                   </div>
                 </div>
-                <div className="admin-detail-fields">
-                  <div className="admin-field"><label className="admin-label">Overview</label><textarea className="admin-input admin-textarea" placeholder="Gambaran umum project..." value={form.overview} onChange={setField('overview')} /></div>
-                  <div className="admin-field"><label className="admin-label">Problem</label><textarea className="admin-input admin-textarea" placeholder="Masalah yang ingin diselesaikan..." value={form.problem} onChange={setField('problem')} /></div>
-                  <div className="admin-field"><label className="admin-label">Solution</label><textarea className="admin-input admin-textarea" placeholder="Solusi yang kamu buat..." value={form.solution} onChange={setField('solution')} /></div>
-                  <div className="admin-field"><label className="admin-label">Features <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Login\nDashboard\nExport data" value={form.features} onChange={setField('features')} /></div>
-                  <div className="admin-field"><label className="admin-label">Development Process <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Analisis kebutuhan\nMembuat desain\nTesting" value={form.process} onChange={setField('process')} /></div>
-                  <div className="admin-field"><label className="admin-label">Challenges <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Tantangan selama pengerjaan..." value={form.challenges} onChange={setField('challenges')} /></div>
-                  <div className="admin-field"><label className="admin-label">Result</label><textarea className="admin-input admin-textarea" placeholder="Hasil akhir project..." value={form.result} onChange={setField('result')} /></div>
-                </div>
+                <details className="admin-optional-details" open={isEditing}>
+                  <summary><span>Detail project tambahan</span><small>Opsional · isi yang tersedia saja</small></summary>
+                  <div className="admin-detail-fields">
+                    <div className="admin-field"><label className="admin-label">Overview</label><textarea className="admin-input admin-textarea" placeholder="Gambaran umum project..." value={form.overview} onChange={setField('overview')} /></div>
+                    <div className="admin-field"><label className="admin-label">Problem</label><textarea className="admin-input admin-textarea" placeholder="Masalah yang ingin diselesaikan..." value={form.problem} onChange={setField('problem')} /></div>
+                    <div className="admin-field"><label className="admin-label">Solution</label><textarea className="admin-input admin-textarea" placeholder="Solusi yang kamu buat..." value={form.solution} onChange={setField('solution')} /></div>
+                    <div className="admin-field"><label className="admin-label">Features <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Login\nDashboard\nExport data" value={form.features} onChange={setField('features')} /></div>
+                    <div className="admin-field"><label className="admin-label">Development Process <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Analisis kebutuhan\nMembuat desain\nTesting" value={form.process} onChange={setField('process')} /></div>
+                    <div className="admin-field"><label className="admin-label">Challenges <span className="admin-field-hint">(satu per baris)</span></label><textarea className="admin-input admin-textarea" placeholder="Tantangan selama pengerjaan..." value={form.challenges} onChange={setField('challenges')} /></div>
+                    <div className="admin-field"><label className="admin-label">Result</label><textarea className="admin-input admin-textarea" placeholder="Hasil akhir project..." value={form.result} onChange={setField('result')} /></div>
+                  </div>
+                </details>
                 <div className="admin-field-row">
                   <div className="admin-field">
                     <label className="admin-label">GitHub Link</label>
@@ -430,11 +467,17 @@ export default function Admin() {
             <div className="admin-panel">
               <div className="admin-panel-header">
                 <div className="admin-panel-label">MANAGE</div>
-                <h2 className="admin-panel-title">Project List <span className="admin-count">{projects.length}</span></h2>
+                <h2 className="admin-panel-title">Daftar Project <span className="admin-count">{projects.length}</span></h2>
               </div>
+              <label className="admin-search">
+                <span aria-hidden="true">⌕</span>
+                <input type="search" value={projectSearch} onChange={e => setProjectSearch(e.target.value)} placeholder="Cari nama, kategori, atau tag..." aria-label="Cari project" />
+                {projectSearch && <button type="button" onClick={() => setProjectSearch('')} aria-label="Hapus pencarian">×</button>}
+              </label>
               <div className="admin-project-list">
-                {projects.length === 0 && <div className="admin-empty">Belum ada project</div>}
-                {projects.map(p => (
+                {projects.length === 0 && <div className="admin-empty">Belum ada project. Tambahkan project pertamamu lewat form.</div>}
+                {projects.length > 0 && filteredProjects.length === 0 && <div className="admin-empty">Project tidak ditemukan. Coba kata kunci lain.</div>}
+                {filteredProjects.map(p => (
                   <div key={p.id} className={`admin-project-item ${selectedId === p.id ? 'selected' : ''}`} onClick={() => handleSelect(p)}>
                     <div className="admin-project-thumb">
                       {p.thumbnail ? <img src={p.thumbnail} alt={p.title} /> : <span>{p.title.charAt(0)}</span>}
@@ -454,7 +497,6 @@ export default function Admin() {
           </>
         )}
 
-        {/* ===== EXPERIENCE ===== */}
         {menu === 'experience' && (
           <>
             <div className="admin-panel">
@@ -512,7 +554,6 @@ export default function Admin() {
           </>
         )}
 
-        {/* ===== CERTIFICATES ===== */}
         {menu === 'certificates' && (
           <>
             <div className="admin-panel">
@@ -575,21 +616,19 @@ export default function Admin() {
           </>
         )}
 
-        {/* ===== SITE CONTENT ===== */}
         {menu === 'content' && (
-          <div style={{ gridColumn: '1 / -1', maxWidth: '900px', width: '100%' }}>
+          <div className="admin-wide-content">
             {SECTIONS.map(sec => {
               const fields = CONTENT_FIELDS.filter(f => f.key.startsWith(sec.key))
               return (
-                <div key={sec.key} className="admin-panel" style={{ marginBottom: '24px' }}>
-                  <div className="admin-panel-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div key={sec.key} className="admin-panel admin-content-panel">
+                  <div className="admin-panel-header admin-wide-header">
                     <div>
                       <div className="admin-panel-label">{sec.label.toUpperCase()} SECTION</div>
                       <h2 className="admin-panel-title">Edit {sec.label}</h2>
                     </div>
                     <button
-                      className="admin-submit"
-                      style={{ width: 'auto', padding: '10px 22px', marginTop: 0, fontSize: '12px' }}
+                      className="admin-submit admin-action-btn"
                       onClick={() => saveSection(sec.key, sec.label)}
                       disabled={savingSection === sec.key}
                     >
@@ -608,18 +647,17 @@ export default function Admin() {
                             </span>
                           )}
                         </label>
-                        <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end' }}>
+                        <div className="admin-field-save-row">
                           {field.textarea ? (
                             <textarea
                               className="admin-input admin-textarea"
-                              style={{ flex: 1, minHeight: field.key === 'about_bio' ? '100px' : '70px' }}
+                              style={{ minHeight: field.key === 'about_bio' ? '100px' : '70px' }}
                               value={content[field.key] || ''}
                               onChange={e => setContent(prev => ({ ...prev, [field.key]: e.target.value }))}
                             />
                           ) : (
                             <input
                               className="admin-input"
-                              style={{ flex: 1 }}
                               type="text"
                               value={content[field.key] || ''}
                               onChange={e => setContent(prev => ({ ...prev, [field.key]: e.target.value }))}
@@ -628,7 +666,7 @@ export default function Admin() {
                           <button
                             onClick={() => saveOneField(field.key)}
                             disabled={savingField === field.key}
-                            style={{ padding: '10px 14px', borderRadius: '8px', border: '1px solid rgba(0,212,255,.25)', background: 'rgba(0,212,255,.08)', color: 'var(--cyan)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '.1em', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, transition: '.2s', alignSelf: 'flex-end', marginBottom: '1px' }}
+                            className="admin-small-save"
                           >
                             {savingField === field.key ? '...' : 'simpan'}
                           </button>
@@ -640,36 +678,34 @@ export default function Admin() {
               )
             })}
 
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px', paddingBottom: '40px' }}>
-              <button className="admin-submit" style={{ width: '300px' }} onClick={saveAll} disabled={loading}>
+            <div className="admin-save-all-wrap">
+              <button className="admin-submit admin-save-all" onClick={saveAll} disabled={loading}>
                 {loading ? <span className="admin-spinner" /> : '✓ Simpan Semua Sekaligus'}
               </button>
             </div>
           </div>
         )}
 
-        {/* ===== TECH STACK ===== */}
         {menu === 'stack' && (
-          <div style={{ gridColumn: '1 / -1', maxWidth: '900px', width: '100%' }}>
+          <div className="admin-wide-content">
             <div className="admin-panel">
-              <div className="admin-panel-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div className="admin-panel-header admin-wide-header">
                 <div>
                   <div className="admin-panel-label">ABOUT SECTION</div>
                   <h2 className="admin-panel-title">Edit Tech Stack</h2>
-                  <p style={{ color: 'var(--dim)', fontSize: '12px', marginTop: '6px', fontFamily: 'var(--font-mono)' }}>
+                  <p className="admin-panel-description">
                     Edit kategori dan skill yang tampil di section About
                   </p>
                 </div>
-                <div style={{ display: 'flex', gap: '8px' }}>
+                <div className="admin-stack-actions">
                   <button
                     onClick={addCat}
-                    style={{ padding: '10px 18px', borderRadius: '10px', border: '1px solid rgba(50,100,255,.3)', background: 'rgba(18,70,255,.12)', color: 'var(--white)', fontFamily: 'var(--font-mono)', fontSize: '11px', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                    className="admin-add-category-btn"
                   >
                     + Kategori
                   </button>
                   <button
-                    className="admin-submit"
-                    style={{ width: 'auto', padding: '10px 22px', marginTop: 0, fontSize: '12px' }}
+                    className="admin-submit admin-action-btn"
                     onClick={saveStack}
                     disabled={savingStack}
                   >
@@ -678,24 +714,24 @@ export default function Admin() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '8px' }}>
+              <div className="admin-stack-list">
                 {stack.map((cat, i) => (
-                  <div key={i} style={{ padding: '20px', borderRadius: '12px', background: 'rgba(5,12,40,.6)', border: '1px solid rgba(50,100,255,.15)', position: 'relative' }}>
+                  <div key={i} className="admin-stack-card">
 
                     {/* Delete cat button */}
                     <button
                       onClick={() => removeCat(i)}
-                      style={{ position: 'absolute', top: '14px', right: '14px', width: '28px', height: '28px', borderRadius: '6px', border: '1px solid rgba(255,70,70,.2)', background: 'rgba(255,70,70,.08)', color: '#fda4af', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                      className="admin-delete-btn admin-stack-delete"
                     >✕</button>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr', gap: '12px', marginBottom: '14px' }}>
+                    <div className="admin-stack-top">
                       {/* Icon picker */}
                       <div className="admin-field">
                         <label className="admin-label">Icon</label>
                         <select
                           value={cat.icon}
                           onChange={e => updateCat(i, 'icon', e.target.value)}
-                          style={{ background: 'rgba(5,12,40,.7)', border: '1px solid rgba(50,100,255,.18)', borderRadius: '8px', padding: '10px 8px', color: 'var(--white)', fontFamily: 'var(--font-body)', fontSize: '18px', cursor: 'pointer', width: '100%' }}
+                          className="admin-input admin-stack-select"
                         >
                           {ICONS.map(ic => <option key={ic} value={ic}>{ic}</option>)}
                         </select>
@@ -730,9 +766,9 @@ export default function Admin() {
                       />
                       {/* Preview pills */}
                       {cat.skills.length > 0 && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '8px' }}>
+                        <div className="admin-skill-preview">
                           {cat.skills.map(s => (
-                            <span key={s} style={{ padding: '3px 10px', borderRadius: '999px', background: 'rgba(18,70,255,.15)', border: '1px solid rgba(50,100,255,.25)', color: '#c7d2fe', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>{s}</span>
+                            <span key={s} className="admin-skill-chip">{s}</span>
                           ))}
                         </div>
                       )}
@@ -744,6 +780,7 @@ export default function Admin() {
           </div>
         )}
 
+        </main>
       </div>
     </div>
   )
