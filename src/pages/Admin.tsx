@@ -354,13 +354,13 @@ export default function Admin() {
           <span>Admin Panel</span>
           <span className="admin-brand-sub">portofolio meysya</span>
         </div>
-        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-          <button className={`admin-btn-ghost ${menu==='projects'?'active':''}`} onClick={() => setMenu('projects')}>Projects</button>
-          <button className={`admin-btn-ghost ${menu==='experience'?'active':''}`} onClick={() => setMenu('experience')}>Experience</button>
-          <button className={`admin-btn-ghost ${menu==='certificates'?'active':''}`} onClick={() => setMenu('certificates')}>Certificates</button>
-          <button className={`admin-btn-ghost ${menu==='content'?'active':''}`} onClick={() => setMenu('content')}>Site Content</button>
-          <button className={`admin-btn-ghost ${menu==='stack'?'active':''}`} onClick={() => setMenu('stack')}>Tech Stack</button>
-        </div>
+        <nav className="admin-nav" aria-label="Navigasi admin">
+          <button className={`admin-btn-ghost ${menu==='projects'?'active':''}`} aria-pressed={menu === 'projects'} onClick={() => setMenu('projects')}>Projects</button>
+          <button className={`admin-btn-ghost ${menu==='experience'?'active':''}`} aria-pressed={menu === 'experience'} onClick={() => setMenu('experience')}>Experience</button>
+          <button className={`admin-btn-ghost ${menu==='certificates'?'active':''}`} aria-pressed={menu === 'certificates'} onClick={() => setMenu('certificates')}>Certificates</button>
+          <button className={`admin-btn-ghost ${menu==='content'?'active':''}`} aria-pressed={menu === 'content'} onClick={() => setMenu('content')}>Site Content</button>
+          <button className={`admin-btn-ghost ${menu==='stack'?'active':''}`} aria-pressed={menu === 'stack'} onClick={() => setMenu('stack')}>Tech Stack</button>
+        </nav>
         <div className="admin-topbar-actions">
           <Link to="/" className="admin-btn-ghost">← Portfolio</Link>
           <button className="admin-btn-ghost" onClick={handleLogout}>Logout</button>
@@ -382,11 +382,11 @@ export default function Admin() {
                 <div className="admin-field-row">
                   <div className="admin-field">
                     <label className="admin-label">Project Title *</label>
-                    <input className="admin-input" type="text" placeholder="e.g. Website Sekolah" value={form.title} onChange={setField('title')} />
+                    <input className="admin-input" type="text" placeholder="e.g. Website Sekolah" value={form.title} onChange={setField('title')} required />
                   </div>
                   <div className="admin-field">
                     <label className="admin-label">Project Type *</label>
-                    <input className="admin-input" type="text" placeholder="e.g. Web Development" value={form.type} onChange={setField('type')} />
+                    <input className="admin-input" type="text" placeholder="e.g. Web Development" value={form.type} onChange={setField('type')} required />
                   </div>
                 </div>
                 <div className="admin-detail-fields">

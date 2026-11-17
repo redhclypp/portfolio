@@ -29,6 +29,7 @@
 .pd-tag   { padding: 5px 14px; border-radius: 999px; background: rgba(18,70,255,.2); border: 1px solid rgba(50,100,255,.3); color: #c7d2fe; font-size: 11px; font-family: var(--font-mono); }
 
 .pd-body { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(260px, .8fr); gap: 28px; padding: 36px 0 80px; align-items: start; max-width: 1200px; margin: 0 auto; }
+.pd-body-no-sidebar { grid-template-columns: minmax(0, 1fr); }
 .pd-main { display: flex; flex-direction: column; gap: 26px; }
 .pd-section { display: flex; flex-direction: column; gap: 16px; }
 .pd-section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); opacity: .8; }

@@ -50,14 +50,25 @@ export default function ProjectDetail() {
   )
 
   const details: ProjectDetails = project.details || {}
+  const tags = Array.isArray(project.tags)
+    ? project.tags.filter((tag: unknown): tag is string => typeof tag === 'string' && tag.trim().length > 0)
+    : []
   const detailBlocks = [
     { title: 'Overview', text: details.overview },
     { title: 'Problem', text: details.problem },
     { title: 'Solution', text: details.solution },
-  ]
-  const gallery = details.screenshots?.length ? details.screenshots : project.demo_files || []
+  ].filter(block => block.text?.trim())
+  const features = details.features?.filter(item => item.trim()) || []
+  const process = details.process?.filter(item => item.trim()) || []
+  const challenges = details.challenges?.filter(item => item.trim()) || []
+  const gallery = (details.screenshots?.length ? details.screenshots : project.demo_files || [])
+    .filter((file: string) => typeof file === 'string' && file.trim().length > 0)
   const hasGithub = Boolean(project.github?.trim())
   const hasDemo = Boolean(project.demo?.trim())
+  const hasLinks = hasGithub || hasDemo
+  const hasTags = tags.length > 0
+  const hasType = Boolean(project.type?.trim())
+  const hasSidebar = hasTags || hasLinks || hasType
 
   return (
     <div className="pd-wrap">
@@ -71,23 +82,23 @@ export default function ProjectDetail() {
         }
         <div className="pd-hero-overlay" />
         <div className="pd-hero-content">
-          <div className="pd-type">{project.type}</div>
+          {hasType && <div className="pd-type">{project.type}</div>}
           <h1 className="pd-title">{project.title}</h1>
-          <div className="pd-tags">
-            {project.tags?.map((t: string, i: number) => (
+          {hasTags && <div className="pd-tags">
+            {tags.map((t: string, i: number) => (
               <span key={i} className="pd-tag">{t}</span>
             ))}
-          </div>
+          </div>}
         </div>
       </div>
 
-      <div className="pd-body">
+      <div className={`pd-body ${hasSidebar ? '' : 'pd-body-no-sidebar'}`}>
 
         <div className="pd-main">
-          {(details.overview || details.problem || details.solution) && (
+          {detailBlocks.length > 0 && (
             <div className="pd-card">
               <div className="pd-detail-grid">
-                {detailBlocks.map(block => block.text && (
+                {detailBlocks.map(block => (
                   <div className="pd-detail-block" key={block.title}>
                     <div className="pd-heading">{block.title}</div>
                     <p className="pd-description">{block.text}</p>
@@ -97,11 +108,11 @@ export default function ProjectDetail() {
             </div>
           )}
 
-          {(details.features?.length || details.process?.length || details.challenges?.length) && (
+          {(features.length > 0 || process.length > 0 || challenges.length > 0) && (
             <div className="pd-detail-columns">
-              {details.features?.length ? <div className="pd-card"><div className="pd-heading">Features</div><ul className="pd-list">{details.features.map((item: string) => <li key={item}>{item}</li>)}</ul></div> : null}
-              {details.process?.length ? <div className="pd-card"><div className="pd-heading">Development Process</div><ol className="pd-list pd-process-list">{details.process.map((item: string, index: number) => <li key={`${index}-${item}`}><span>{index + 1}</span>{item}</li>)}</ol></div> : null}
-              {details.challenges?.length ? <div className="pd-card"><div className="pd-heading">Challenges</div><ul className="pd-list">{details.challenges.map((item: string) => <li key={item}>{item}</li>)}</ul></div> : null}
+              {features.length > 0 ? <div className="pd-card"><div className="pd-heading">Features</div><ul className="pd-list">{features.map((item: string) => <li key={item}>{item}</li>)}</ul></div> : null}
+              {process.length > 0 ? <div className="pd-card"><div className="pd-heading">Development Process</div><ol className="pd-list pd-process-list">{process.map((item: string, index: number) => <li key={`${index}-${item}`}><span>{index + 1}</span>{item}</li>)}</ol></div> : null}
+              {challenges.length > 0 ? <div className="pd-card"><div className="pd-heading">Challenges</div><ul className="pd-list">{challenges.map((item: string) => <li key={item}>{item}</li>)}</ul></div> : null}
             </div>
           )}
 
@@ -131,7 +142,7 @@ export default function ProjectDetail() {
             </div>
           )}
 
-          {details.result && (
+          {details.result?.trim() && (
             <div className="pd-card">
               <div className="pd-heading">Result</div>
               <p className="pd-description">{details.result}</p>
@@ -139,17 +150,17 @@ export default function ProjectDetail() {
           )}
         </div>
 
-        <aside className="pd-sidebar">
-          <div className="pd-card">
+        {hasSidebar && <aside className="pd-sidebar">
+          {hasTags && <div className="pd-card">
             <div className="pd-section-label" style={{ marginBottom: '16px' }}>Tech Stack</div>
             <div className="pd-tags-wrap">
-              {project.tags?.map((t: string, i: number) => (
+              {tags.map((t: string, i: number) => (
                 <span key={i} className="pd-tag">{t}</span>
               ))}
             </div>
-          </div>
+          </div>}
 
-          <div className="pd-card">
+          {hasLinks && <div className="pd-card">
             <div className="pd-section-label" style={{ marginBottom: '16px' }}>Links</div>
             <div className="pd-links">
               {hasGithub && (
@@ -166,15 +177,14 @@ export default function ProjectDetail() {
                   <span className="pd-link-arrow">↗</span>
                 </a>
               )}
-              {!hasGithub && !hasDemo && <span className="pd-link-empty">No links added in Admin</span>}
             </div>
-          </div>
+          </div>}
 
-          <div className="pd-card pd-card-glow">
+          {hasType && <div className="pd-card pd-card-glow">
             <div className="pd-section-label" style={{ marginBottom: '8px' }}>Type</div>
             <div className="pd-type-big">{project.type}</div>
-          </div>
-        </aside>
+          </div>}
+        </aside>}
 
       </div>
     </div>
