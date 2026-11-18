@@ -145,6 +145,9 @@ export default function Projects() {
           spaceBetween={24}
           slidesPerView={'auto'}
           freeMode={true}
+          simulateTouch
+          grabCursor
+          threshold={0}
           navigation={{ nextEl: '.proj-next', prevEl: '.proj-prev' }}
           pagination={{ clickable: true, el: '.proj-dots' }}
           className="proj-swiper"
