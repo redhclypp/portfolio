@@ -581,11 +581,6 @@
   .hero-search   { margin-top: 18px; padding: 9px 14px; max-width: 100%; border-radius: 12px; align-self: stretch; }
   .hero-search input { font-size: 10px; text-align: left; }
 
-  /* Theme switcher di mobile */
-  .theme-trigger-label { display: none; }
-  .theme-trigger { padding: 7px 10px; }
-  .theme-panel   { right: 0; }
-
   .nav-right { gap: 8px; }
   .nav-menu-btn { display: flex; }
 }

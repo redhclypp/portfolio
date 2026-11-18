@@ -12,7 +12,6 @@ Website ini dibuat untuk menampilkan profil, pengalaman, sertifikasi, serta berb
 - Interactive 3D element menggunakan Lanyard Scene
 - Custom cursor
 - Loading screen
-- Theme switcher
 - Responsive design untuk berbagai ukuran perangkat
 - Login page untuk akses halaman admin
 - Admin page untuk pengelolaan konten portfolio
@@ -123,8 +122,7 @@ src/
 │   ├── Loader.tsx
 │   ├── Navbar.tsx
 │   ├── Projects.tsx
-│   ├── Strip.tsx
-│   └── Themeswitcher.tsx
+│   └── Strip.tsx
 │
 ├── hooks/
 │   └── useSiteContent.ts
