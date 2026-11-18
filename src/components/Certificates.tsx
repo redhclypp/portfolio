@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, FreeMode } from 'swiper/modules'
+import { Navigation, Pagination, FreeMode, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -55,10 +55,14 @@ export default function Certificates() {
 
       <div className="cert-swiper-wrap" data-aos="fade-up">
         <Swiper
-          modules={[Navigation, Pagination, FreeMode]}
+          modules={[Navigation, Pagination, FreeMode, Mousewheel]}
           spaceBetween={20}
           slidesPerView={'auto'}
           freeMode={true}
+          mousewheel={{ forceToAxis: true, releaseOnEdges: true }}
+          simulateTouch
+          grabCursor
+          threshold={0}
           navigation={{ nextEl: '.cert-next', prevEl: '.cert-prev' }}
           pagination={{ clickable: true, el: '.cert-dots' }}
           className="cert-swiper"

@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabase'
 import { Link } from 'react-router-dom'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, FreeMode } from 'swiper/modules'
+import { Navigation, Pagination, FreeMode, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -141,10 +141,11 @@ export default function Projects() {
 
       <div className="proj-swiper-wrap" data-aos="fade-up">
         <Swiper
-          modules={[Navigation, Pagination, FreeMode]}
+          modules={[Navigation, Pagination, FreeMode, Mousewheel]}
           spaceBetween={24}
           slidesPerView={'auto'}
           freeMode={true}
+          mousewheel={{ forceToAxis: true, releaseOnEdges: true }}
           simulateTouch
           grabCursor
           threshold={0}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, FreeMode } from 'swiper/modules'
+import { Navigation, Pagination, FreeMode, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -37,10 +37,14 @@ export default function Experience() {
 
       <div className="exp-swiper-wrap" data-aos="fade-up">
         <Swiper
-          modules={[Navigation, Pagination, FreeMode]}
+          modules={[Navigation, Pagination, FreeMode, Mousewheel]}
           spaceBetween={20}
           slidesPerView={'auto'}
           freeMode={true}
+          mousewheel={{ forceToAxis: true, releaseOnEdges: true }}
+          simulateTouch
+          grabCursor
+          threshold={0}
           navigation={{ nextEl: '.exp-next', prevEl: '.exp-prev' }}
           pagination={{ clickable: true, el: '.exp-dots' }}
           className="exp-swiper"
